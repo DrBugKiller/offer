@@ -11,12 +11,25 @@ Tips:
 '''
 #100块钱，每次可以花1,2,3块钱，一共有多少种花法？
 def mySolution(n):
-    if n==1 or n==0:
+    if n==1:
         sum=1
+    elif n==0:#边界值考虑清楚,如果有0元，那么0种花法
+        sum=0
     elif n==2:#此处注意的是一定要把n=2考虑进去，因为此时它不满足sum = mySolution(n-1) + mySolution(n-2) + mySolution(n-3)
         sum = 2
     else:
         sum = mySolution(n-1) + mySolution(n-2) + mySolution(n-3)
     return sum
-n=mySolution(30)
+n=mySolution(4)
+print(n)
+#斐波那契数列
+def mySolution_for(n):
+    if n==1:
+        sum=1
+    elif n==0:
+        sum=0
+    else:
+        sum = mySolution(n-1) + mySolution(n-2)
+    return sum
+n=mySolution_for(30)
 print(n)
