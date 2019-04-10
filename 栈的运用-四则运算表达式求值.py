@@ -3,7 +3,7 @@
 # @Author  : DrMa
 import sys
 # eq_str=sys.stdin.readline().strip()
-temp_str='9+(3-1)*3+8/2'#转为后缀表达式
+temp_str='9+(3-1)*3+2/2'#转为后缀表达式
 num_list='0,1,2,3,4,5,6,7,8,9,19'.split(',')
 print(num_list[::-1])
 def zhong2hou(temp_str):
