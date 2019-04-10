@@ -2,10 +2,17 @@
 # @Time    : 2018/11/23 20:55
 # @Author  : DrMa
 import sys
-# N=int(sys.stdin.readline().strip())
-# ai_list=list(map(int,sys.stdin.readline().split()))
-# K,D=list(map(int,sys.stdin.readline().split()))#这里不加list也行
-N=8
+temp_str=sys.stdin.readline().strip()#此处注意readline是会把回车也读进去的，所以需要strip()把回车删掉一下,strip()可以把两边的回车删掉
+temp_str2=input()#input是不读取回车的
+N=int(temp_str)
+while True:
+    temp_str = input()
+    if temp_str=='':
+        break
+
+ai_list=list(map(int,sys.stdin.readline().split()))
+K,D=list(map(int,sys.stdin.readline().split()))#这里不加list也行
+
 A=[7,3,7,5,8,3,-10,4]
 k,d=[4,5]
 # 从N个人中选K个,选中的相邻两个人的编号不超过D
