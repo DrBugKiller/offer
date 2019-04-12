@@ -1,9 +1,40 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2019/4/11 15:44
 # @Author  : DrMa
-a="<[播]放|来>[一|几]<首|曲|个>@{singer}的<歌[曲]|[流行]音乐>"
-a=a.replace(']','| >').replace('[','<')
-print(a)
+a="小爱<[播]放|来>[一|几]<首|曲|个>@{singer}的<歌[曲]|[流行]音乐>"
+a=a.replace(']','|>').replace('[','<')
+
+def plusfuhao(a):
+    left_index = a.index('<')
+    if a[:left_index].count('>') == 0 and a[0]!='<':
+        a = '<' + a[:left_index] + '>' + a[left_index:]
+    return a
+a=plusfuhao(a)
+def real_xianhou(a):
+    def get_xianhou_patt(a):
+        all_patt_list = []
+        while len(a)>0:
+            one_patt_list = []
+            for i in a:
+                one_patt_list.append(i)
+                if one_patt_list.count('>')==one_patt_list.count('<')and one_patt_list.count('<')>0:
+                    a=a[len(one_patt_list):]
+                    all_patt_list.append(''.join(one_patt_list))
+                    break
+        return all_patt_list
+    all_temp=get_xianhou_patt(a)
+    all_real = []
+    for i in all_temp:
+        a = plusfuhao(i)
+        a_all = get_xianhou_patt(a)
+        all_real += a_all
+    return all_real
+all_xianhou_patt=real_xianhou(a)
+print(all_xianhou_patt)
+
+quit()
+
+
 def contentMerge(v1,v2):#追加模式
     #v1中的每一个字符串后追加v2中字符的内容,v1,v2是个list，elem是string的pattern
     if len(v1)<1:
@@ -38,7 +69,7 @@ def analysePattern(pattern,rootDepth,addEmpty):
         elif c=='>' or c==']':
             depth-=1
         elif c=='|'and depth==rootDepth:
-            ors.append(i)         #与根同层的|符号，直接拆分为子pattern处理
+            ors.append(i)   #与根同层的|符号，直接拆分为子pattern处理
     start=0
     if len(ors)>0:#包含与根同层的或符号，直接拆分处理
         for i in range(len(ors)):
@@ -47,6 +78,13 @@ def analysePattern(pattern,rootDepth,addEmpty):
             start=end+1#|位置的下一个位置开始
             result.extend(part)#因为result和part同级，我们用extend
     else:#此时没有最外的|,此时没有同级的，只有先后级别
+        all_xianhou_patt = real_xianhou(pattern)
+
+
+
+
+
+
         depth=rootDepth
         stacks=[]#存放int的栈，把<和[的位置记录下来
         hasPattern=False#是否包含标记符| <> []
@@ -97,7 +135,9 @@ def isMatch(set,query):
         if query==set[i]:return True
     return False
 
-
+inputs = "<[播]放|来>[一|几]<首|曲|个>@{singer}的<歌[曲]|[流行]音乐>"
+all_ex=analysePattern(inputs,0,False)
+print(all_ex)
 
 def inprocess(strings):
     dicts = {'<':'>', '>':'<', '[':']', ']':'[' }
@@ -166,11 +206,9 @@ def testing(qurry, collect):
         i += 1
     return 1
 
-
 if __name__ == '__main__':
     inputs = "<[播]放|来>[一|几]<首|曲|个>@{singer}的<歌[曲]|[流行]音乐>"
     res = inprocess(inputs)
-
     qurry = "LJS@{singer}GLXGQ"
 
 
