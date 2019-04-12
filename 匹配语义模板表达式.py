@@ -3,13 +3,18 @@
 # @Author  : DrMa
 a="小爱<[播]放|来>[一|几]<首|曲|个>@{singer}的<歌[曲]|[流行]音乐>"
 a=a.replace(']','|>').replace('[','<')
-
 def plusfuhao(a):
     left_index = a.index('<')
     if a[:left_index].count('>') == 0 and a[0]!='<':
         a = '<' + a[:left_index] + '>' + a[left_index:]
     return a
 a=plusfuhao(a)
+
+def prase_patt(pattern_str):
+    pass
+
+
+
 def real_xianhou(a):
     def get_xianhou_patt(a):
         all_patt_list = []
