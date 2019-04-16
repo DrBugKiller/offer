@@ -59,7 +59,7 @@ def analysePattern(pattern,rootDepth):
                 if depth==rootDepth:
                     if i-right_bracket_next>0:#把中间没有<>但是必选的内容放进去
                         print('pattern[necessary_Start:i]:',pattern[right_bracket_next:i],depth)
-                        part=analysePattern(pattern[right_bracket_next:i],depth)
+                        part=[pattern[right_bracket_next:i]]
                         result=contentMerge(result,part)
                 hasPattern=True
                 depth+=1#深度+1
@@ -79,7 +79,7 @@ def analysePattern(pattern,rootDepth):
         else:
             if right_bracket_next<len(pattern):#处理形如<A|B>C的C这一部分
                 print('pattern[necessary_Start:len(pattern)]:',pattern[right_bracket_next:len(pattern)],depth)
-                part=analysePattern(pattern[right_bracket_next:len(pattern)],depth)
+                part=[pattern[right_bracket_next:len(pattern)]]
                 result=contentMerge(result,part)
     return result
 def del_square_brackets(str_input):
