@@ -41,12 +41,12 @@ def analysePattern(pattern,rootDepth):
         for i in range(len(ors)):
             end=ors[i]
             print('pattern[start:end]', pattern[start:end], rootDepth)
-            part=analysePattern(pattern[start:end],rootDepth)#递归了，
+            part_result=analysePattern(pattern[start:end],rootDepth)#递归了，
             start=end+1#|位置的下一个位置开始
-            result+=part#因为result和part同级，我们用extend
+            result+=part_result#因为result和part同级，我们用extend
         print('pattern[start:end]', pattern[start:], rootDepth)
-        part = analysePattern(pattern[start:], rootDepth)
-        result+=part
+        part_result = analysePattern(pattern[start:], rootDepth)
+        result+=part_result
     else:#此时没有最外的|,此时没有同级的，只有先后级别
         depth=rootDepth
         left_bracket_indexs=[] #把<位置记录下来,遇到>我们
@@ -59,8 +59,8 @@ def analysePattern(pattern,rootDepth):
                 if depth==rootDepth:
                     if i-right_bracket_next>0:#把中间没有<>但是必选的内容放进去
                         print('pattern[necessary_Start:i]:',pattern[right_bracket_next:i],depth)
-                        part=[pattern[right_bracket_next:i]]
-                        result=contentMerge(result,part)
+                        part_result=[pattern[right_bracket_next:i]]
+                        result=contentMerge(result,part_result)
                 hasPattern=True
                 depth+=1#深度+1
                 left_bracket_indexs.append(i)
@@ -72,15 +72,14 @@ def analysePattern(pattern,rootDepth):
                 #只有当'>'是同根级别才递归
                 if depth==rootDepth:
                     print('pattern[index+1:i]:',pattern[left_bracket_index+1:i],depth+1)
-                    part=analysePattern(pattern[left_bracket_index+1:i],depth+1)#看一下这个
-                    result=contentMerge(result,part)
-        if hasPattern==False:#<>|[]都没有，那就直接把pattern放进去
-            result.append(pattern)
-        else:
-            if right_bracket_next<len(pattern):#处理形如<A|B>C的C这一部分
-                print('pattern[necessary_Start:len(pattern)]:',pattern[right_bracket_next:len(pattern)],depth)
-                part=[pattern[right_bracket_next:len(pattern)]]
-                result=contentMerge(result,part)
+                    part_result=analysePattern(pattern[left_bracket_index+1:i],depth+1)#看一下这个
+                    result=contentMerge(result,part_result)
+        if hasPattern==True and right_bracket_next<len(pattern):#针对<A|B>C的情况
+            print('pattern[necessary_Start:len(pattern)]:', pattern[right_bracket_next:len(pattern)], depth)
+            part_result = [pattern[right_bracket_next:len(pattern)]]
+            result = contentMerge(result, part_result)
+        if hasPattern==False:#<>|[]都没有，那就直接把pattern放进去,没有特殊符的走这个路线
+            result=[pattern]
     return result
 def del_square_brackets(str_input):
     str_output=str_input.replace('[','<').replace(']','|>')
@@ -91,6 +90,7 @@ inputs = "小爱同学<[播]放|来>[一|几]<首|曲|个>周杰伦的<歌[曲]|
 inputs=del_square_brackets(inputs)
 print(len(inputs))
 all_ex=set(analysePattern(inputs,0))
+print(len(all_ex))
 print(all_ex)
 
 
