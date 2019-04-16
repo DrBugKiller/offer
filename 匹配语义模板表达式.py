@@ -74,11 +74,11 @@ def analysePattern(pattern,rootDepth):
                     print('pattern[index+1:i]:',pattern[left_bracket_index+1:i],depth+1)
                     part_result=analysePattern(pattern[left_bracket_index+1:i],depth+1)#看一下这个
                     result=contentMerge(result,part_result)
-        if hasPattern==True and right_bracket_next<len(pattern):#针对<A|B>C的情况
+        if hasPattern==True and right_bracket_next<len(pattern):#针对<A|B>C的情况,注意这一部分只能是<A|B>处理完成之后再contentMerge
             print('pattern[necessary_Start:len(pattern)]:', pattern[right_bracket_next:len(pattern)], depth)
             part_result = [pattern[right_bracket_next:len(pattern)]]
             result = contentMerge(result, part_result)
-        if hasPattern==False:#<>|[]都没有，那就直接把pattern放进去,没有特殊符的走这个路线
+        if hasPattern==False:#<>|[]都没有，那就直接把pattern放进去,这是整个递归的结束条件!没有同根的|,也没有<>等特殊符号.
             result=[pattern]
     return result
 def del_square_brackets(str_input):
