@@ -71,7 +71,7 @@ def analysePattern(pattern,rootDepth):
                 left_bracket_index=left_bracket_indexs.pop()#不管是否同根级别，都要pop，以保证<>的级别相同
                 #只有当'>'是同根级别才递归
                 if depth==rootDepth:
-                    print('pattern[index+1:i]:',pattern[left_bracket_index+1:i],depth)
+                    print('pattern[index+1:i]:',pattern[left_bracket_index+1:i],depth+1)
                     part=analysePattern(pattern[left_bracket_index+1:i],depth+1)#看一下这个
                     result=contentMerge(result,part)
         if hasPattern==False:#<>|[]都没有，那就直接把pattern放进去
@@ -89,7 +89,7 @@ test_str='<<A|B>C>D'
 test_str=del_square_brackets(test_str)
 inputs = "小爱同学<[播]放|来>[一|几]<首|曲|个>周杰伦的<歌[曲]|[流行]音乐>好吗？"
 inputs=del_square_brackets(inputs)
-print(inputs)
+print(len(inputs))
 all_ex=set(analysePattern(inputs,0))
 print(all_ex)
 
