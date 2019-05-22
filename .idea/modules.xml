@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Multi_label_HAN/.idea/Multi_label_HAN.iml" filepath="$PROJECT_DIR$/../Multi_label_HAN/.idea/Multi_label_HAN.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/OFFER.iml" filepath="$PROJECT_DIR$/.idea/OFFER.iml" />
     </modules>
   </component>

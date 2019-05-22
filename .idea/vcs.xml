@@ -4,6 +4,7 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../InterviewFAQ" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../JudgeDoc190314" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Multi_label_HAN" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../TopJudge" vcs="Git" />
   </component>
 </project>
