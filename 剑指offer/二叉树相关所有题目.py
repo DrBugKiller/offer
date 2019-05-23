@@ -97,7 +97,7 @@ class Solution:
     def mirror(self, root):
         if not root:
             return root
-        root.left, root.right = root.right, root.left
+        root.left, root.right = root.right, root.left#python还能这么玩?
         self.mirror(root.left)
         self.mirror(root.right)
     '''
@@ -150,6 +150,7 @@ class Solution:
         # 如果两个有一个为空
         if not p or not q:
             return False
+        # 如果两个都不为空
         if p and q and p.val == q.val:
             l = self.isSubtree(p.left, q.right)
             r = self.isSubtree(p.right, q.left)
