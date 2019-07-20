@@ -23,8 +23,14 @@ def solution(a):
     return max_num
 
 '''
-题目: 输入n个整数, 找出其中最小的k个数. 例如, 输入4,5,1,6,2,7,3,8这个8个数字,
-则最小的4个数字是1,2,3,4
+题目40: 
+输入n个整数, 找出其中最小的k个数. 例如, 输入4,5,1,6,2,7,3,8这个8个数字,
+则最小的4个数字是1,2,3,4.
+思路:
+利用Partiton函数,如果pivot经过Partition之后的index刚好是k-1, 那么index从0~k-1的这k个数就是目标.
+如果不是则分为两种情况: 
+    1. index大于k-1, 说明topk在a[index]的左边, 我们就对[0,index-1]进行Partition
+    2. index小于k-1, 说明topk在a[index]的右边, 我们就对[index+1,len(a)-1]进行Partition
 '''
 def Partition(a,low,high):
     l_index=low+1
