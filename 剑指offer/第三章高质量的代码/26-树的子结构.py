@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2019/5/23 11:05
+# @Time    : 2019/7/20 12:07
 # @Author  : DrMa
-class Tree(object):
-    def __init__(self,root):
-        self.val=root
-        self.left=None
-        self.right=None
 '''
 输入两棵二叉树A和B,判断B是不是A的子树.
 思路: 1.在树A中找到和B的根节点的值一样的节点R
       2.第二步在判断树A中以R为根节点的子树是不是包含和树B一样的结构
 '''
+
+class Tree(object):
+    def __init__(self,root):
+        self.val=root
+        self.left=None
+        self.right=None
+
 def hasSubtree(pRoot1, pRoot2):
     if not pRoot1 or not pRoot2:#有个疑问就是pRoot2如果是空树, 应该返回True
         return False

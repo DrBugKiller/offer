@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2019/3/26 16:32
+# @Time    : 2019/7/20 12:05
 # @Author  : DrMa
 '''
 Question:两个链表的第一个公共节点
@@ -18,7 +18,6 @@ class Solution:
         p2 = pHead2
         a = 1
         b = 1
-        ####
         while p1 and p1.next:
             a += 1
             p1 = p1.next
@@ -28,7 +27,6 @@ class Solution:
         if p1 != p2:
             return None
         #### 如果尾部结点都不相同，说明没有公共节点
-
         #### 补齐法
         if a > b:
             p1,p2 = pHead1,pHead2
