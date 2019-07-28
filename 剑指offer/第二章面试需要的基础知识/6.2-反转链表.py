@@ -5,7 +5,6 @@ class node(object):
     def __init__(self,val):
         self.val=val
         self.next=None
-
 def init_node(l):
     head=node(None)
     temp_node=head
@@ -18,7 +17,6 @@ def visit_node(head):
     while head!=None:
         print(head.val)
         head=head.next
-
 def reverse_node(head):
     if head==None or head.next==None:
         return head
@@ -29,10 +27,9 @@ def reverse_node(head):
         rev_node=head#更新反转的链表,此时rev_node的头结点已经是上一步的head
         head=next_node#遍历head到下一个节点
     return rev_node
-
 if __name__=='__main__':
     l=[1,2,3,4]
     head=init_node(l)
-    # visit_node(head)
+    visit_node(head)
     rever_node=reverse_node(head)
     visit_node(rever_node)

@@ -20,6 +20,7 @@ def select_sort(a):
         a[i],a[max_index]=a[max_index],a[i]
     return a
 #2019.7.19
+
 def QuickSort(list,low,high):
     if high > low:
          #传入参数，通过Partitions函数，获取k下标值
@@ -43,10 +44,10 @@ def Partitions(list,low,high):
          if l_index < r_index:
              list[l_index],list[r_index] = list[r_index],list[l_index]
     #若移动完，已经相遇，则交换right对应的值和参考值
-
      list[low],list[r_index] = list[r_index],list[low]
-     #返回k值
+     #返回index值
      return r_index
+
 #2019.7.20
 def insert_sort(a):
     for i in range(1,len(a)):
