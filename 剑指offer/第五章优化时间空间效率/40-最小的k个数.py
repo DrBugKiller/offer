@@ -12,12 +12,12 @@
     2. index小于k-1, 说明topk在a[index]的右边, 我们就对[index+1,len(a)-1]进行Partition
 '''
 def Partition(a,low,high):
-    l_index=low+1
+    l_index=low
     r_index=high
     while l_index<r_index:
-        while a[r_index]>=a[low] and l_index<r_index:
+        while a[r_index]>a[low] and l_index<r_index:
             r_index-=1
-        while a[l_index]<a[low] and l_index<r_index:
+        while a[l_index]<=a[low] and l_index<r_index:
             l_index+=1
         if l_index<r_index:
             a[l_index],a[r_index]=a[r_index],a[l_index]
