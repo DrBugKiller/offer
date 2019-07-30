@@ -8,6 +8,12 @@
 思路:
 1. 回溯,DFS
 2. 动态规划
+注意:
+1. 在32行代码.之所以复制matrix,因为在递归函数内部定义的变量, 它作为参数传入递归函数再次调用的时候,
+它是可以被递归函数改变值得,相当于global了这个matrix. 显然我们不希望它在传入另一个方向的递归函数之前被改变,
+所以我们复制一个matrix_,把它传入另一个方向的递归函数.
+2. 复制matrix, 不能简单的matrix_=matrix就可以了,这是不行的, 因为这只是复制了一个新"指针",但对应的内存块
+是一致的. 需要重新开辟新内存放入这个matrix, 即matrix_=[x for x in matrix]
 '''
 class BackTrack():#BackTrack denotes "回溯法"
     def __init__(self):
@@ -23,18 +29,16 @@ class BackTrack():#BackTrack denotes "回溯法"
             self.ways+=1
             return
         matrix[i*cols+j]=0
-        matrix_=[x for x in matrix]
+        matrix_=[x for x in matrix]#决定成败的一句代码
         self.find_way(matrix,i+1,j,raws,cols)
         self.find_way(matrix_,i,j+1,raws,cols)
 
+def jump(raws, cols):
+    dp = [[1] * (cols) for _ in range(raws)]
+    for i in range(1, raws):
+        for j in range(1, cols):
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+    print(dp[raws-1][cols-1])
 
 if __name__ == "__main__":
-
-    print(BackTrack().ways_count(3,3))
-    # x, y = map(int, input().strip().split())
-    # x,y=2,2
-    # dp = [[1] * (y + 1) for _ in range(x + 1)]
-    # for i in range(1, x + 1):
-    #     for j in range(1, y + 1):
-    #         dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
-    # print(dp[x][y])
+    jump(3,3)

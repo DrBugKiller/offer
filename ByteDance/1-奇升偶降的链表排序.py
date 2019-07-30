@@ -29,20 +29,20 @@ def split_list(head):
     count=1
     while head!=None:#
         if count%2==1:#奇数位
-            if cur1==None:
+            if cur1!=None:
                 cur1.next=head#构建不带头结点的cur1
                 cur1=cur1.next
-            else:#if cur1==None,把head的空头结点给它
-                cur1= head#head=cur1, head1=cur1, 他俩同步变化
-                head1 =cur1
-        else:         #偶数位
-            if cur2:
+            elif cur1==None:#if cur1==None,把head的空头结点给它
+                cur1 = head#head=cur1, head1=cur1, 他俩同步变化
+                head1 =cur1#这一步很有意思,cur1
+        elif count%2==0: #偶数位
+            if cur2!=None:
                 cur2.next=head
                 cur2=cur2.next
-            else:#if cur2==None,把head的空头结点给它
-                cur2=head#赋值顺序 head=cur2, head2=cur2
-                head2=cur2
-        head=head.next
+            elif cur2==None:#if cur2==None,把head的空头结点给它
+                cur2 = head#赋值顺序 head=cur2, head2=cur2
+                head2 = cur2
+        head=head.next#更新为下一个节点
         count+=1
     cur1.next=None
     cur2.next=None
@@ -58,14 +58,14 @@ def reverse_list(head):
         rev_node=head#更新逆序的链表
         head=next#更新当前节点
     return rev_node
-def merge_list(head1,head2):
+def merge_list(head1,head2):#合并列表
     head=Node(None)
     tail=head
-    while head1 and head2:
+    while head1!=None and head2!=None:
         if head1.val<=head2.val:
             tail.next=head1
             head1=head1.next
-        else:
+        elif head1.val>head2.val:
             tail.next=head2
             head2=head2.next
         tail=tail.next
