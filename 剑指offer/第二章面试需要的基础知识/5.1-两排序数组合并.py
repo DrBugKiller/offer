@@ -13,10 +13,12 @@ def merge_op(a,b):
     a_index_new=len(a)-1
     b_index=len(b)-1
     while a_index_new>=0:#注意条件
-        if a[a_index]<=b[b_index] and b_index>=0 or (a_index<0 and b_index>=0):
+        #如果b的元素大,或者是a列表已经没有值了而b还有
+        if b[b_index]>=a[a_index] and b_index>=0 or (a_index<0 and b_index>=0):
             a[a_index_new]=b[b_index]
             b_index-=1
             a_index_new-=1
+        #如果a的元素大,或者是b列表已经没有了而a还有
         elif a[a_index]>b[b_index] and a_index>=0 or (a_index>=0 and b_index<0):
             a[a_index_new]=a[a_index]
             a_index-=1
