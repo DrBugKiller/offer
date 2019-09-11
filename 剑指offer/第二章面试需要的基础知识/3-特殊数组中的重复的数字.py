@@ -11,14 +11,16 @@
 相等，如果相等，说明重复；如果不相等，则将m和a[m]对应的数值交换，使得数值在和自己下标相同的位置。
 '''
 def duplicate(a):
-    for i in range(len(a)):
-        m=a[i]
-        if m==i:
+    for index in range(len(a)):
+        value=a[index]
+        if value==index:
             continue
-        else:
-            if m ==a[m]:
-                return m
+        elif value!=index:
+            if value ==a[value]:
+                return value
             else:
-                a[i],a[m]=a[m],a[i]
-a=[2,1,3,0,2]
-print(duplicate(a))
+                a[index],a[value]=a[value],a[index]
+    print()
+if __name__=='__main__':
+    a=[2,1,3,0,2]
+    print(duplicate(a))

@@ -2,6 +2,7 @@
 # @Time    : 2019/7/18 19:52
 # @Author  : DrMa
 #2019.7.18
+
 def bubble_sort(a):
     #冒泡排序
     for i in range(len(a)-1):
@@ -9,7 +10,10 @@ def bubble_sort(a):
             if a[j]<a[j+1]:
                 a[j],a[j+1]=a[j+1],a[j]
     return a
+
+
 #2019.7.18
+
 def select_sort(a):
     #选择排序
     for i in range(len(a)-1):
@@ -49,6 +53,8 @@ def Partitions(list,low,high):
      return r_index
 
 #2019.7.20
+
+#插入排序
 def insert_sort(a):
     for i in range(1,len(a)):
         insert_index=i

@@ -16,23 +16,17 @@ class Node(object):
 def delete_node(head_node, del_node):
     if head_node==None or del_node==None:
         return False
-    #要删除的节点不是尾结点
-    if del_node.next!=None:
-        del_node_next=del_node.next
-        #先修改内容,覆盖value
-        del_node.val=del_node_next.val
-        #再修改指针
-        del_node.next=del_node_next.next
-        #删除结点j
-        del_node_next.value=None
-        del_node_next.next=None
-    #要删除的节点是尾结点
-    elif del_node.next==None:
+    if del_node.next!=None:#要删除的节点不是尾结点
+        next_node=del_node.next
+        del_node.val=next_node.val#先修改内容,覆盖value
+        del_node.next=next_node.next#再修改指针
+        next_node.value=None#删除结点j
+        next_node.next=None
+    elif del_node.next==None:#要删除的节点是尾结点
         node=head_node
         while node.next!=del_node:
             node=node.next
         node.next=None
-    #要删除的是尾结点而且等于头结点(链表只有一个节点)
-    elif del_node==head_node:
+    elif del_node==head_node:#要删除的是尾结点而且等于头结点(链表只有一个节点)
         return None
     return head_node
