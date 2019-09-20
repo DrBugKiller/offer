@@ -114,7 +114,6 @@ class Solution:
             return []
         if not root.left and not root.right and root.val == expectNumber:
             return [[root.val]]
-        result = []
         left = self.findPath(root.left, expectNumber - root.val)
         right = self.findPath(root.right, expectNumber - root.val)
         # for i in left + right:

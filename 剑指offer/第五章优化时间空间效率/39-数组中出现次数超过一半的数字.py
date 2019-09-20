@@ -22,3 +22,39 @@ def solution(a):
                 max_num=a[i]
                 num_of_mn=1
     return max_num
+
+class Solution:
+    def majorityElement(self, nums):
+        def partition(nums,low,high):
+            pivot=nums[low]
+            l=low
+            r=high
+            while l<r:
+                while l<r and nums[r]>pivot:
+                    r-=1
+                while l<r and nums[l]<=pivot:
+                    l+=1
+                if l<r:
+                    nums[l],nums[r]=nums[r],nums[l]
+            nums[low],nums[r]=nums[r],nums[low]
+            return r
+        length=len(nums)
+        middle=length>>1
+
+        pivot_index=partition(nums,0,length-1)
+        while pivot_index!=middle:
+
+            if pivot_index>middle:
+                pivot_index=partition(nums,0,pivot_index-1)
+
+            elif pivot_index<middle:
+                pivot_index=partition(nums,pivot_index+1,length-1)
+
+        return nums[pivot_index]
+
+if __name__=='__main__':
+    s=Solution()
+    nums=[-1,1,1,1,2,1]
+    print(nums)
+    res=s.majorityElement(nums)
+    print(res)

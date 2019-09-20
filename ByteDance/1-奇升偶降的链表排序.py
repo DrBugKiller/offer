@@ -13,40 +13,34 @@ class Node(object):
     def __init__(self,val):
         self.val=val
         self.next=None
-def init_list(l):
-    #创建不带头结点的单链表,是为了对应好奇数位和偶数位,链表下标从1开始
-    head=Node(None)
-    temp=head
-    for val in l:
-        temp.next=Node(val)
-        temp=temp.next
-    temp.next=None
-    return head.next
+
 def split_list(head):
     #按照奇偶位拆分为两个链表
-    head1,head2=None,None
-    cur1,cur2=None,None
+    head_odd,head_even=None,None
+    temp_node_odd,temp_node_even=None,None
     count=1
-    while head!=None:#
+    while head!=None:
         if count%2==1:#奇数位
-            if cur1!=None:
-                cur1.next=head#构建不带头结点的cur1
-                cur1=cur1.next
-            elif cur1==None:#if cur1==None,把head的空头结点给它
-                cur1 = head#head=cur1, head1=cur1, 他俩同步变化
-                head1 =cur1#这一步很有意思,cur1
+            if temp_node_odd == None: #第一次,我们要生成一个头结点
+                temp_node_odd = head
+                head_odd = temp_node_odd  # head_odd变为头结点,temp_node_odd是它的探索节点
+            elif temp_node_odd!=None: #头结点生成之后,开始延长链表
+                temp_node_odd.next=head
+                temp_node_odd=temp_node_odd.next
+
         elif count%2==0: #偶数位
-            if cur2!=None:
-                cur2.next=head
-                cur2=cur2.next
-            elif cur2==None:#if cur2==None,把head的空头结点给它
-                cur2 = head#赋值顺序 head=cur2, head2=cur2
-                head2 = cur2
+            if temp_node_even==None:
+                temp_node_even = head
+                head_even = temp_node_even
+            elif temp_node_even!=None:
+                temp_node_even.next=head
+                temp_node_even=temp_node_even.next
+
         head=head.next#更新为下一个节点
         count+=1
-    cur1.next=None
-    cur2.next=None
-    return head1,head2
+    temp_node_odd.next=None
+    temp_node_even.next=None
+    return head_odd,head_even
 def reverse_list(head):
     #反转链表
     if  head==None or head.next==None:
@@ -58,21 +52,35 @@ def reverse_list(head):
         rev_node=head#更新逆序的链表
         head=next#更新当前节点
     return rev_node
-def merge_list(head1,head2):#合并列表
-    head=Node(None)
-    tail=head
-    while head1!=None and head2!=None:
+
+def merge_list(head1,head2):
+    head=Node(None)#定义一个空头结点
+    temp_node=head
+    while head1!=None and head2!=None:#条件为两个都不为空链表
+        #添加head1或head2中比较小的节点
         if head1.val<=head2.val:
-            tail.next=head1
+            temp_node.next=head1
             head1=head1.next
         elif head1.val>head2.val:
-            tail.next=head2
+            temp_node.next=head2
             head2=head2.next
-        tail=tail.next
+        temp_node=temp_node.next
+    #while条件出来,肯定有一个链表是空的,把非空的链表接上
     if head1:
-        tail.next=head1
+        temp_node.next=head1
     if head2:
-        tail.next=head2
+        temp_node.next=head2
+    return head.next
+
+
+def init_list(l):
+    #创建不带头结点的单链表,是为了对应好奇数位和偶数位,链表下标从1开始
+    head=Node(None)
+    temp=head
+    for val in l:
+        temp.next=Node(val)
+        temp=temp.next
+    temp.next=None
     return head.next
 def visit_list(head):
     while head:

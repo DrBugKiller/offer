@@ -10,28 +10,32 @@
 然后从此位置开始递归, 上下左右四个方向都要考虑, 同时注意边界条件.
 最后注意主函数的return False的条件, 递归函数return True的条件.
 '''
+class Solution():
+    def whether_path(self,matrix, rows, cols, path):
+        #递归函数
+        def hasPath_(matrix, path, i, j):
+            #递归结束条件
+            if not path:
+                return True
+            matrix[i * cols + j] = '0'#做一个已经走了的标志
+            if path[0] == matrix[(i - 1) * cols + j] and i - 1 >= 0:  # 往上走,不能出了边界
+                return hasPath_(matrix, path[1:], i - 1, j)
+            elif path[0] == matrix[(i + 1) * cols + j] and i + 1 <= rows - 1:  #往下走,不能出了边界
+                return hasPath_(matrix, path[1:], i + 1, j)
+            elif path[0] == matrix(i * cols + j - 1) and j - 1 >= 0:  #往左走,不能出了边界
+                return hasPath_(matrix, path[1:], i, j - 1)
+            elif path[0] == matrix(i * cols + j + 1) and j + 1 <= cols - 1:  #往右走,不能出了边界
+                return hasPath_(matrix, path[1:], i, j + 1)
+            else:
+                return False
+        #主函数部分
+        for i in range(rows):
+            for j in range(cols):
+                if matrix[i*cols+j]==path[0]: #找到入口
+                    if hasPath_(matrix,path[1:],i,j)==True:
+                        return True
+        return False #这一句别忘了.如果hasPath_没有递归
 
-def whether_path(matrix, rows, cols, path):
-    for i in range(rows):
-        for j in range(cols):
-            if matrix[i*cols+j]==path[0]:
-                if hasPath_(matrix,rows,cols,path[1:],i,j)==True:
-                    return True
-    return False#这一句别忘了.如果hasPath_没有递归
-def hasPath_(matrix,rows,cols,path,i,j):
-    if not path:
-        return True #这句话别忘了,意思是如果path走到最后了都走完了,那么说明有对应路径.
-    matrix[i*cols+j]='0'
-    if path[0]==matrix[(i-1)*cols+j] and i-1>=0:#往上走,不能出了边界
-        return hasPath_(matrix,rows,cols,path[1:],i-1,j)
-    elif path[0]==matrix[(i+1)*cols+j] and i+1<=rows-1:#往下走,不能出了边界
-        return hasPath_(matrix,rows,cols,path[1:],i+1,j)
-    elif path[0]==matrix(i*cols+j-1) and j-1>=0:#往左走,不能出了边界
-        return hasPath_(matrix,rows,cols,path[1:],i,j-1)
-    elif path[0]==matrix(i*cols+j+1) and j+1<=cols-1:#往右走,不能出了边界
-        return hasPath_(matrix,rows,cols,path[1:],i,j+1)
-    else:
-        return False
 
 
 

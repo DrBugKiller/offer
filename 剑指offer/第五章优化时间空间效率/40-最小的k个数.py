@@ -26,10 +26,11 @@ def Partition(a,low,high):
 def topk(a,k):
     index=Partition(a,0,len(a)-1)
     while index!=k-1:
+        print(index)
         if index>k-1:
             index=Partition(a,0,index-1)
         if index<k-1:
             index=Partition(a,index+1,len(a)-1)
     return a[:k]
-test_arr=[4,5,1,6,2,7,3,8,4,10,5,0]
+test_arr=[1,2,3,2,2,2,5,4,2]
 print(topk(test_arr,4))

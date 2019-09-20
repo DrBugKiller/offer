@@ -9,7 +9,7 @@
 1.考虑到大数问题,不能简单的for循环打印所有的.
 2.将问题转换为数字排列的解法,递归让代码更简洁
 '''
-class Solution:
+class Solution2:
     def Print_1_to_max(self,n):
         if n<=0:
             return
@@ -37,12 +37,23 @@ class Solution:
 # a=Solution()
 # a.Print_1_to_max(2)
 
-def Print_recursively(number,length,index):
-    if index==length-1:
-        print(number)
-        return
-    for i in range(10):
-        number[index+1]=str(i)
-        Print_recursively(number,length,index+1)
-test_list=['0','0','0']
-Print_recursively(test_list,3,0)
+#递归完成排序
+
+
+class Solution():
+    def permute(self, n):
+        #递归函数
+        def helper(index): #index代表位数
+            if index==n:
+                res.append(number[:])
+                return
+            for i in range(0,9+1):
+                number[index]=str(i)
+                helper(index+1)
+        #主函数部分
+        number = ['x'] * n #初始化
+        res = []
+        helper(0)
+        return res
+
+
