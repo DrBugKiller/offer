@@ -15,5 +15,6 @@ if __name__=='__main__':
     s=Solution()
     test_data=[-3,-1,1,3,5]
     print(s.getEqualNumIndex(test_data,0,len(test_data)-1))
-
+    a=[]
+    print(a.pop())
 
